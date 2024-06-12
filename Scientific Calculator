@@ -1,0 +1,121 @@
+#include<iostream>
+#include<cmath>
+#define PI 3.14159265358979323846
+using namespace std;
+double add(double a,double b){
+    return a+b;
+}
+double subtract(double a,double b){
+    return a-b;
+}
+double multiply(double a,double b){
+    return a*b;
+}
+double divide(double a,double b){
+    if(b==0){
+        cout<<"b cannot be zero";
+    }
+    else{
+    return a/b;
+    }
+}
+double sine(double angle){
+    double radians = angle * PI / 180.0;
+    return sin(radians);
+}
+double cosine(double angle){
+    double radians = angle * PI / 180.0;
+    return cos(radians);
+}
+double tangent(double angle){
+    double radians = angle * PI / 180.0;
+    return tan(radians);
+}
+
+double doubleLogBase10(double value) {
+    return log10(value);
+}
+
+double doublePower(double base, double exponent) {
+    return pow(base, exponent);
+}
+long long doubleFactorial(int n) {
+    if (n < 0) {
+        cout<<"Factorial is not defined for negative numbers";
+    }
+    long long result = 1;
+    for (int i = 1; i <= n; i++) {
+        result *= i;
+    }
+    return result;
+}
+int main(){
+    int x,y,s,v,c,b,e,f,g;
+    cout<<"Enter your choice: ";
+    cin>>c;
+
+    switch(c){
+        case 1:
+        cout<<"enter the first number :";
+        cin>>x;
+        cout<<"enter the second number :";
+        cin>>y;
+        cout<<"Sum = "<< add(x,y)<<endl;
+        break;
+         case 2:
+        cout<<"enter the first number :";
+        cin>>x;
+        cout<<"enter the second number :";
+        cin>>y;
+        cout<<"Subtract = "<< subtract(x,y)<<endl;
+        break;
+         case 3:
+        cout<<"enter the first number :";
+        cin>>x;
+        cout<<"enter the second number :";
+        cin>>y;
+        cout<<"multiply = "<< multiply(x,y)<<endl;
+        break;
+         case 4:
+        cout<<"enter the first number :";
+        cin>>x;
+        cout<<"enter the second number :";
+        cin>>y;
+        cout<<"divide = "<< divide(x,y)<<endl;
+        break;
+        case 5:
+        cout<<"enter the angle :";
+        cin>>s;
+        cout<<"sine value of"<<s <<" "<<sine(s)<<endl;
+        break;
+        case 6:
+        cout<<"enter the angle :";
+        cin>>s;
+        cout<<"cosine value of"<<s<<cosine(s)<<endl;
+        break;
+        case 7:
+        cout<<"enter the angle:";
+        cin>>s;
+        cout<<"tangent value of"<<s<<tangent(s)<<endl;
+        break;
+        case 8:
+        cout<<"enter the value:";
+        cin>>v;
+        cout<<"value of log "<<doubleLogBase10(v)<<endl;
+        break;
+        case 9:
+        cout<<"enter the base:";
+        cin>>b;
+        cout<<"enter the exponent:";
+        cin>>e;
+        cout<< "value of power "<<doublePower(b,e)<<endl;
+        break;
+        case 10:
+        cout<<"enter the number:";
+        cin>>f;
+        cout<<"value of factorial : "<<doubleFactorial(f)<<endl;
+        break;
+        default:
+        cout<<"Invalid input"<<endl;
+    }
+}
