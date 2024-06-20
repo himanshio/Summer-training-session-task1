@@ -1,0 +1,60 @@
+#include <iostream>
+using namespace std;
+
+// Creating a stack - LIFO structure - any values(data types)
+template <typename T>
+class Stack {
+    private:
+        T arr[50];
+        int top;
+
+    public:
+        Stack(): top(-1){} // Constructor initializing top
+
+        // Pushing value onto stack
+        void push(T val){
+            if (top >= 49){
+                cout << "Stack overflow" << endl;
+            } else {
+                arr[++top] = val;
+            }
+        }
+
+        // Popping value from stack
+        T pop(){
+            if (top < 0){
+                cout << "Stack underflow" << endl;
+                return 0;
+            } else {
+                return arr[top--];
+            }
+        }
+
+        // Function to print the values in the stack
+        void printStack(){
+            for(int i = top; i >= 0; i--){
+                cout << arr[i] << endl;
+            }
+        }
+};
+
+int main(){
+    Stack<int> intStack;
+    Stack<string> charStack;
+
+    intStack.push(10);
+    intStack.push(20);
+    charStack.push("hello");
+    charStack.push("world");
+
+    cout << "Stack values: " << endl;
+    intStack.printStack();
+    cout << endl;
+    charStack.printStack();
+
+    cout << "Popped values: " << endl;
+    cout << intStack.pop() << endl;
+    cout << charStack.pop() << endl;
+
+    return 0;
+}
