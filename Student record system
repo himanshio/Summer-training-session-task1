@@ -1,0 +1,168 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <limits>
+
+using namespace std;
+
+// Vectors to store student information
+vector<string> studentNames;
+vector<string> subjects;
+vector<char> Grade;
+
+// Function to display the main menu
+void displayMainMenu() {
+    cout << "\n\t\tStudent Information System" << endl;
+    cout << "\t\t----------------------------" << endl;
+    cout << "1. Add a new student" << endl;
+    cout << "2. Delete a student" << endl;
+    cout << "3. Update a student" << endl;
+    cout << "4. View all students" << endl;
+    cout << "5. Exit" << endl;
+    cout << "Enter your choice: ";
+}
+
+// Function to add a new student
+void addStudent() {
+    string name, subject;
+    char grades;
+
+    cout << "\nEnter student name: ";
+    getline(cin, name);
+    cout << "Enter subject: ";
+    getline(cin, subject);
+
+    while (true) {
+        cout << "Enter Grades: ";
+        if (cin >> grades && grades >= 0 && grades <= 100) {
+            break;
+        } else {
+            cout << "Invalid grade. Please enter a grade between a and f." << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+    }
+    cin.ignore(); // Ignore the newline character after reading grade
+
+    studentNames.push_back(name);
+    subjects.push_back(subject);
+    Grade.push_back(grades);
+
+    cout << "Student added successfully!" << endl;
+}
+
+// Function to delete a student
+void deleteStudent() {
+    string name;
+    cout << "\nEnter the name of the student to delete: ";
+    getline(cin, name);
+
+    int index = -1;
+    for (int i = 0; i < studentNames.size(); i++) {
+        if (studentNames[i] == name) {
+            index = i;
+            break;
+        }
+    }
+
+    if (index == -1) {
+        cout << "Student not found." << endl;
+    } else {
+        studentNames.erase(studentNames.begin() + index);
+        subjects.erase(subjects.begin() + index);
+        Grade.erase(Grade.begin() + index);
+        cout << "Student deleted successfully!" << endl;
+    }
+}
+
+// Function to update a student
+void updateStudent() {
+    string name;
+    cout << "\nEnter the name of the student to update: ";
+    getline(cin, name);
+
+    int index = -1;
+    for (int i = 0; i < studentNames.size(); i++) {
+        if (studentNames[i] == name) {
+            index = i;
+            break;
+        }
+    }
+
+    if (index == -1) {
+        cout << "Student not found." << endl;
+    } else {
+        string newName, newSubject;
+        char newgrade;
+
+        cout << "Enter new student name: ";
+        getline(cin, newName);
+        cout << "Enter new subject: ";
+        getline(cin, newSubject);
+
+        while (true) {
+            cout << "Enter Grades: ";
+            if (cin >> newgrade && newgrade >= 'a' && newgrade <= 'f') {
+                break;
+            } else {
+                cout << "Invalid grade. Please enter a grade between a and f." << endl;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            }
+        }
+        cin.ignore(); // Ignore the newline character after reading grade
+
+        studentNames[index] = newName;
+        subjects[index] = newSubject;
+        Grade[index] = newgrade;
+
+        cout << "Student updated successfully!" << endl;
+    }
+}
+
+// Function to display all students
+void viewAllStudents() {
+    cout << "\nStudent Information:" << endl;
+    cout << "Name\tSubject\tGrades" << endl;
+    cout << "----\t-------\t-----" << endl;
+    for (int i = 0; i < studentNames.size(); i++) {
+        cout << studentNames[i] << "\t" << subjects[i] << "\t" << Grade[i] << endl;
+    }
+}
+
+int main() {
+    int choice;
+    do {
+        displayMainMenu();
+        if (!(cin >> choice)) {
+            cout << "Invalid choice. Please enter a number." << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            continue;
+        }
+        cin.ignore(); // Ignore the newline character after reading choice
+
+        switch (choice) {
+            case 1:
+                addStudent();
+                break;
+            case 2:
+                deleteStudent();
+                break;
+            case 3:
+                updateStudent();
+                break;
+            case 4:
+                viewAllStudents();
+                break;
+            case 5:
+                cout << "\nExiting the program. Goodbye!" << endl;
+                break;
+            default:
+                cout << "\nInvalid choice. Please try again." << endl;
+                break;
+        }
+    } while (choice != 5);
+
+    return 0;
+}
