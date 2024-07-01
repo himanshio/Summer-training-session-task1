@@ -1,0 +1,78 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+class Stack{
+    vector<int>elements;
+    public:
+    void push(int elem){
+        elements.push_back(elem);
+    }
+   void pop(){
+        if(elements.empty()==false){
+            elements.pop_back();
+        }
+        else{
+            cout<<"stack is empty";
+            
+        }
+    }
+    int peek(){
+        if(elements.empty()==false){
+            return elements.back();
+        }
+        else{
+            cout<<"stack is empty";
+            return -1;
+        }
+    }
+
+    bool isempty(){
+        return elements.empty();
+    }
+};
+class Queue  {
+private:
+     Stack s1,s2;
+
+public:
+    void enqueue(int item) {
+        s1.push(item);
+    }
+
+    int dequeue() {
+        if (s2.isempty()) {
+            while (!s1.isempty()) {
+                s2.push(s1.peek());
+                s1.pop();
+            }
+        }
+        int frontElement = s2.peek();
+        s2.pop();
+        return frontElement;
+    }
+
+    int peek() {
+        if (s2.isempty()) {
+            while (!s1.isempty()) {
+                s2.push(s1.peek());
+                s1.pop();
+            }
+        }
+        return s2.peek();
+    }
+
+    bool isEmpty() {
+        return s1.isempty() && s2.isempty();
+    }
+};
+
+int main() {
+    Queue q;
+    q.enqueue(10);
+    q.enqueue(20);
+    q.enqueue(30);
+    cout << "Dequeued element: " << q.dequeue() <<endl;
+    cout << "Front element: " << q.peek() <<endl;
+    cout << "Queue is empty: " <<boolalpha << q.isEmpty() <<endl;
+    return 0;
+}
